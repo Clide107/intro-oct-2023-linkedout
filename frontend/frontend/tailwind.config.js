@@ -4,9 +4,9 @@ module.exports = {
     "./src/**/*.{html,ts}",
   ],
   daisyui: {
-    themes:["valentine"]
+    themes: ["valentine"],
   },
-  theme: { 
+  theme: {
     extend: {},
   },
   plugins: [

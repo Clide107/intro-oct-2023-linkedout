@@ -1,31 +1,31 @@
 import { Component } from "@angular/core";
 import { RouterLink, RouterLinkActive } from "@angular/router";
- 
+
 @Component({
   standalone: true,
   template: `
-<nav>
-<div class="tabs">
-<a
+    <nav>
+      <div class="tabs">
+        <a
           routerLink="/home"
           [routerLinkActive]="['tab-active']"
           class="tab tab-lg tab-lifted"
->Home</a
->
-<a
+          >Home</a
+        >
+        <a
           routerLink="/counter"
           [routerLinkActive]="['tab-active']"
           class="tab tab-lg tab-lifted"
->Counter</a
->
-<a
+          >Counter</a
+        >
+        <a
           routerLink="/todos"
           [routerLinkActive]="['tab-active']"
           class="tab tab-lg tab-lifted"
->Todo List</a
->
-</div>
-</nav>
+          >Todo List</a
+        >
+      </div>
+    </nav>
   `,
   selector: "app-navigation",
   imports: [RouterLink, RouterLinkActive],
