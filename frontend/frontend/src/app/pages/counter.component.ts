@@ -1,15 +1,14 @@
 import { Component } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { Store } from "@ngrx/store";
-import { CounterCommands } from "../state/counter.actions";
+import { CounterCommands, CounterEvents } from "../state/counter.actions";
 import { CounterFeature } from "../state/counter";
-import { count } from "rxjs";
 import { CountByComponent } from "./components/count-by.component";
 
 @Component({
-    selector: "app-counter",
-    standalone: true,
-    template: `
+  selector: "app-counter",
+  standalone: true,
+  template: `
     <div>
       <button type="button" class="btn btn-primary" (click)="decrement()">
         -
@@ -20,19 +19,28 @@ import { CountByComponent } from "./components/count-by.component";
       </button>
     </div>
     <div>
-      <button [disabled]="current() === 0" (click)="reset()" type="button" class="btn btn-warning">Reset</button>
+      <button
+        [disabled]="current() === 0"
+        (click)="reset()"
+        type="button"
+        class="btn btn-warning"
+      >
+        Reset
+      </button>
+      <div>
+        <app-count-by />
+      </div>
     </div>
-    <div>
-    <app-count-by />
-</div>
   `,
-    styles: [],
-    imports: [CommonModule, CountByComponent]
+  styles: [],
+  imports: [CommonModule, CountByComponent],
 })
 export class CounterComponent {
   current = this.store.selectSignal(CounterFeature.selectCurrent);
 
-  constructor(private readonly store: Store) {}
+  constructor(private readonly store: Store) {
+    store.dispatch(CounterEvents.counterFeatureEntered());
+  }
 
   increment() {
     this.store.dispatch(CounterCommands.incrementTheCount());
@@ -42,7 +50,7 @@ export class CounterComponent {
     this.store.dispatch(CounterCommands.decrementTheCount());
   }
 
-  reset(){
-    this.store.dispatch(CounterCommands.resetTheCount())
+  reset() {
+    this.store.dispatch(CounterCommands.resetTheCount());
   }
 }
